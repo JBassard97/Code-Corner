@@ -1,0 +1,27 @@
+
+
+/* ! These styles are for the header and main layout */
+
+body {
+    background: linear-gradient(45deg, rgb(36, 61, 61), black);
+}
+
+/* ! These styles are for each Post */
+
+.postDiv {
+    border: 2px solid black;
+    margin: 6px 0px;
+    padding-left: 6px;
+}
+
+.username {
+    color: darkcyan;
+}
+
+.postedBy {
+    color: khaki;
+}
+
+.createdOn {
+    color: lightskyblue;
+} 

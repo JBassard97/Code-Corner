@@ -1,0 +1,33 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Code-Corner</title>
+  </head>
+  <body>
+
+    <header>
+      <h1>Code-Corner</h1>
+      <h2>A space to share knowledge and grow together!</h2>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/dashboard">Dashboard</a></li>
+          <li>
+            {{#if req.session.logged_in}}
+              <a href="/logout">Logout</a>
+            {{else}}
+              <a href="/login">Login</a>
+            {{/if}}
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      {{{body}}}
+    </main>
+
+  </body>
+</html>

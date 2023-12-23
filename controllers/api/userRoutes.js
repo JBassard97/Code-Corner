@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const { User } = require("../../models");
 
+// localhost:3001/api/users/
+
 router.get("/", async (req, res) => {
   try {
     const allusers = await User.findAll({
@@ -28,6 +30,8 @@ router.post("/", async (req, res) => {
     res.status(400).json(err);
   }
 });
+
+// localhost:3001/api/users/login
 
 router.post("/login", async (req, res) => {
   try {
