@@ -8,14 +8,14 @@
   <body>
 
     <header>
-      <h1>Code-Corner</h1>
+      <h1 class="mainTitle">Code-Corner</h1>
       <h2>A space to share knowledge and grow together!</h2>
-      <nav>
+      <nav class="navBar">
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/dashboard">Dashboard</a></li>
           <li>
-            {{#if req.session.logged_in}}
+            {{#if logged_in}}
               <a href="/logout">Logout</a>
             {{else}}
               <a href="/login">Login</a>

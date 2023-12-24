@@ -1,0 +1,15 @@
+<form class="login-form">
+  <label for="username">Username:</label>
+  <input type="text" id="usernameInput" name="username" required />
+
+  <label for="password">Password:</label>
+  <input type="password" id="passwordInput" name="password" required />
+
+  <button type="submit">Login</button>
+</form>
+
+{{#if error}}
+  <p class="error">{{error}}</p>
+{{/if}}
+
+<script src="/js/loginHandle.js"></script>
