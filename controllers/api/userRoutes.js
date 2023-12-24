@@ -64,11 +64,19 @@ router.post("/login", async (req, res) => {
 
 router.post("/logout", (req, res) => {
   if (req.session.logged_in) {
-    req.session.destroy(() => {
-      res.status(204).end();
+    req.session.destroy((err) => {
+      if (err) {
+        res
+          .status(500)
+          .json({ success: false, message: "Failed to destroy session" });
+      } else {
+        res.status(204).json({ success: true });
+      }
     });
   } else {
-    res.status(404).end();
+    res
+      .status(404)
+      .json({ success: false, message: "No active session to log out" });
   }
 });
 

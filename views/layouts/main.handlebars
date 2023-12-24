@@ -16,9 +16,9 @@
           <li><a href="/dashboard">Dashboard</a></li>
           <li>
             {{#if logged_in}}
-              <a href="/logout">Logout</a>
+              <a id="logoutButton" href="/login">Logout</a>
             {{else}}
-              <a href="/login">Login</a>
+              <a id="loginButton" href="/login">Login</a>
             {{/if}}
           </li>
         </ul>
@@ -28,6 +28,11 @@
     <main>
       {{{body}}}
     </main>
+
+    <!-- Only include the logout script if the user is logged in -->
+    {{#if logged_in}}
+      <script src="/js/logoutHandle.js"></script>
+    {{/if}}
 
   </body>
 </html>
