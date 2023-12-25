@@ -1,7 +1,10 @@
 {{#if logged_in}}
-  <p>Welcome, {{user.username}}!</p>
-<h2>User Info</h2>
+  <h2>Welcome, {{user.username}}!</h2>
+  <h2>User Info</h2>
+<h3>User Id: {{user.id}}</h3>
+<h3>Your Email: {{user.email}}</h3>
   <!-- Form for changing password -->
+  <h3>Change Password</h3>
   <form id="changePasswordForm">
     <label for="currentPassword">Current Password:</label>
     <input
@@ -21,12 +24,13 @@
   <h2>Your Posts</h2>
   {{#each posts}}
     <div class="postDiv">
-        <button id="deleteButton-{{this.dataValues.id}}">Delete</button>
-        <button>Edit Post</button>
+      <button id="deleteButton-{{this.dataValues.id}}">Delete</button>
+      <button class="editButton" data-post-id="{{this.dataValues.id}}">Edit Post</button>
       <h3>{{this.dataValues.title}}</h3>
       <p>{{this.dataValues.text}}</p>
       <p>Posted on {{format_time this.dataValues.createdAt}}</p>
     </div>
+    <div id="editFormContainer"></div>
   {{/each}}
 
 {{else}}
@@ -36,3 +40,5 @@
 
 <script src="/js/dashboardFunctions/changePassword.js"></script>
 <script src="/js/dashboardFunctions/deletePost.js"></script>
+<script src="/js/dashboardFunctions/editPostForm.js"></script>
+<script src="/js/dashboardFunctions/putPostData.js"></script>

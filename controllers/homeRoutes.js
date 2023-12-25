@@ -61,26 +61,4 @@ router.get("/dashboard", async (req, res) => {
   }
 });
 
-// router.get("/dashboard", async (req, res) => {
-//   try {
-//     // Check if the user is logged in
-//     if (req.session.logged_in) {
-//       // If logged in, you might fetch user details or other relevant data
-//       const userData = await User.findByPk(req.session.user_id, {
-//         attributes: { exclude: ["password"] },
-//       });
-
-//       const user = userData.get({ plain: true });
-
-//       // Render the dashboard page with user information
-//       res.render("dashboard", { user, logged_in: req.session.logged_in });
-//     } else {
-//       // If not logged in, render the dashboard without user information
-//       res.render("dashboard", { logged_in: req.session.logged_in });
-//     }
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
-
 module.exports = router;
