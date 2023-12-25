@@ -1,3 +1,17 @@
+<!-- New post form -->
+<div class="postForm">
+  <h2>Create a New Post</h2>
+  <form id="newPostForm">
+    <label for="postTitle">Title:</label>
+    <input type="text" id="postTitle" name="postTitle" required>
+
+    <label for="postText">Text:</label>
+    <textarea id="postText" name="postText" required></textarea>
+
+    <button type="submit">Create Post</button>
+  </form>
+</div>
+
 {{#each posts}}
   <div class="postDiv">
     <h2 class="postTitle">{{title}}</h2>
@@ -5,3 +19,5 @@
     <p><span class="postedBy">Posted by</span> <span class="username">{{User.username}}</span> <span class="postedBy">on</span> <span class="createdOn">{{format_time createdAt}}</span></p>
   </div>
 {{/each}}
+
+<script src="js/homepageFunctions/createPost.js"></script>
