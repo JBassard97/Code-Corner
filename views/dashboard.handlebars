@@ -1,0 +1,22 @@
+{{#if logged_in}}
+  <p>Welcome, {{user.username}}!</p>
+
+  <!-- Form for changing password -->
+  <form id="changePasswordForm">
+    <label for="currentPassword">Current Password:</label>
+    <input
+      type="password"
+      id="currentPassword"
+      name="currentPassword"
+      required
+    />
+
+    <label for="newPassword">New Password:</label>
+    <input type="password" id="newPassword" name="newPassword" required />
+
+    <button type="submit">Change Password</button>
+  </form>
+{{else}}
+  <a href="/login"><p>Please log in to manage your user details and manage
+      posts!</p></a>
+{{/if}}
