@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const { User } = require("../../models");
+const bcrypt = require("bcrypt");
 
 // localhost:3001/api/users/
-
+// json response with all users
 router.get("/", async (req, res) => {
   try {
     const allusers = await User.findAll({
@@ -16,6 +17,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Create a new user
 router.post("/", async (req, res) => {
   try {
     const userData = await User.create(req.body);
@@ -79,6 +81,53 @@ router.post("/logout", (req, res) => {
       .json({ success: false, message: "No active session to log out" });
   }
 });
+
+router.put("/password", async (req, res) => {
+  try {
+    const user = await User.findByPk(req.session.user_id);
+
+    if (!user || !bcrypt.compareSync(req.body.currentPassword, user.password)) {
+      return res.status(400).json({ message: "Invalid current password." });
+    }
+
+    // Hash and update the new password
+    const newHashedPassword = bcrypt.hashSync(req.body.newPassword, 10);
+    await User.update(
+      { password: newHashedPassword },
+      { where: { id: user.id } }
+    );
+
+    // Update the session with the new user data after changing the password
+    req.session.user_id = user.id;
+    req.session.logged_in = true;
+
+    res.status(200).json({ success: true });
+  } catch (err) {
+    console.error("Error changing password:", err);
+    res.status(500).json({ message: "Internal server error." });
+  }
+});
+// router.put("/password", async (req, res) => {
+//   try {
+//     const user = await User.findByPk(req.session.user_id);
+
+//     if (!user || !bcrypt.compareSync(req.body.currentPassword, user.password)) {
+//       return res.status(400).json({ message: "Invalid current password." });
+//     }
+
+//     // Hash and update the new password
+//     const newHashedPassword = bcrypt.hashSync(req.body.newPassword, 10);
+//     await User.update(
+//       { password: newHashedPassword },
+//       { where: { id: user.id } }
+//     );
+
+//     res.status(200).json({ success: true });
+//   } catch (err) {
+//     console.error("Error changing password:", err);
+//     res.status(500).json({ message: "Internal server error." });
+//   }
+// });
 
 router.delete("/:id", async (req, res) => {
   try {

@@ -3,8 +3,12 @@ const registerUser = async (event) => {
     event.preventDefault();
 
     const newEmail = document.querySelector("#registerEmail").value.trim();
-    const newUsername = document.querySelector("#registerUsername").value.trim();
-    const newPassword = document.querySelector("#registerPassword").value.trim();
+    const newUsername = document
+      .querySelector("#registerUsername")
+      .value.trim();
+    const newPassword = document
+      .querySelector("#registerPassword")
+      .value.trim();
     const confirmPassword = document
       .querySelector("#confirmPassword")
       .value.trim();
@@ -22,7 +26,11 @@ const registerUser = async (event) => {
     // Send the user data to the server
     const response = await fetch("/api/users", {
       method: "POST",
-      body: JSON.stringify({ email: newEmail, username: newUsername, password: newPassword }),
+      body: JSON.stringify({
+        email: newEmail,
+        username: newUsername,
+        password: newPassword,
+      }),
       headers: { "Content-Type": "application/json" },
     });
 

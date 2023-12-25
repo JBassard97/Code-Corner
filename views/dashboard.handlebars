@@ -1,6 +1,6 @@
 {{#if logged_in}}
   <p>Welcome, {{user.username}}!</p>
-
+<h2>User Info</h2>
   <!-- Form for changing password -->
   <form id="changePasswordForm">
     <label for="currentPassword">Current Password:</label>
@@ -16,7 +16,23 @@
 
     <button type="submit">Change Password</button>
   </form>
+
+  <!-- Display posts of the logged-in user -->
+  <h2>Your Posts</h2>
+  {{#each posts}}
+    <div class="postDiv">
+        <button id="deleteButton-{{this.dataValues.id}}">Delete</button>
+        <button>Edit Post</button>
+      <h3>{{this.dataValues.title}}</h3>
+      <p>{{this.dataValues.text}}</p>
+      <p>Posted on {{format_time this.dataValues.createdAt}}</p>
+    </div>
+  {{/each}}
+
 {{else}}
   <a href="/login"><p>Please log in to manage your user details and manage
       posts!</p></a>
 {{/if}}
+
+<script src="/js/dashboardFunctions/changePassword.js"></script>
+<script src="/js/dashboardFunctions/deletePost.js"></script>
