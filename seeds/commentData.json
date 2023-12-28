@@ -1,0 +1,17 @@
+[
+  {
+    "text": "Great post! I learned a lot.",
+    "user_id": 1,  
+    "post_id": 1   
+  },
+  {
+    "text": "Arrow functions are indeed very useful.",
+    "user_id": 2,  
+    "post_id": 2   
+  },
+  {
+    "text": "I completely agree. Perseverance is the key to success.",
+    "user_id": 3,  
+    "post_id": 3   
+  }
+]

@@ -4,7 +4,7 @@
     <h2>Create a New Post</h2>
     <form id="newPostForm">
       <label for="postTitle">Title:</label>
-      <input type="text" id="postTitle" name="postTitle" required>
+      <input type="text" id="postTitle" name="postTitle" required />
 
       <label for="postText">Text:</label>
       <textarea id="postText" name="postText" required></textarea>
@@ -17,11 +17,42 @@
 {{/if}}
 
 {{#each posts}}
+  {{log this}}
+  {{log "logged_in in each iteration: " ../logged_in}}
   <div class="postDiv">
     <h2 class="postTitle">{{title}}</h2>
     <p>{{text}}</p>
-    <p><span class="postedBy">Posted by</span> <span class="username">{{User.username}}</span> <span class="postedBy">on</span> <span class="createdOn">{{format_time createdAt}}</span></p>
+    <p><span class="postedBy">Posted by</span>
+      <span class="username">{{User.username}}</span>
+      <span class="postedBy">on</span>
+      <span class="createdOn">{{format_time createdAt}}</span></p>
+    {{#if ../logged_in}}
+      <!-- Form to add a comment -->
+      <form class="commentForm" data-post-id="{{id}}">
+        <label for="commentContent">Add Comment:</label>
+        <input type="text" id="commentContent" name="commentContent" required>
+        <button type="submit">Submit Comment</button>
+      </form>
+
+      <!-- Display comments -->
+      {{#if comments.length}}
+        <div class="commentsContainer">
+          <h3>Comments:</h3>
+          {{#each comments}}
+            <div class="comment">
+              <p><span class="commentedBy">{{User.username}}</span> at {{format_time createdAt}}</p>
+              <p>{{text}}</p>
+            </div>
+          {{/each}}
+        </div>
+      {{/if}}
+    {{/if}}
   </div>
 {{/each}}
 
+{{#if logged_in}}
+  <div>Logged In!</div>
+{{/if}}
+
 <script src="js/homepageFunctions/createPost.js"></script>
+<script src="js/homepageFunctions/createComment.js"></script>

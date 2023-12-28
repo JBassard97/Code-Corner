@@ -1,10 +1,10 @@
 const router = require("express").Router();
-const { Post, User } = require("../models");
+const { Post, User, Comment } = require("../models");
 
 router.get("/", async (req, res) => {
   try {
-    const allposts = await Post.findAll({
-      // Establishing descending order by id so most recent data is presented first
+    // Fetch all posts with associated user details (excluding comments)
+    const allPosts = await Post.findAll({
       include: [
         {
           model: User,
@@ -13,13 +13,70 @@ router.get("/", async (req, res) => {
       ],
       order: [["createdAt", "DESC"]],
     });
-    const posts = allposts.map((post) => post.get({ plain: true }));
-    // res.json(allposts); //simple json res for now
-    res.render("homepage", { posts, logged_in: req.session.logged_in });
+
+    // Create an array to store posts with comments
+    const postsWithComments = [];
+
+    // Iterate through each post
+    for (const post of allPosts) {
+      const plainPost = post.get({ plain: true });
+
+      // Fetch associated comments for the current post
+      const comments = await Comment.findAll({
+        where: { post_id: plainPost.id },
+        include: [
+          {
+            model: User,
+            attributes: ["username"],
+          },
+        ],
+        attributes: ["text", "createdAt"],
+      });
+
+      // Add the comments to the current post
+      plainPost.comments = comments.map((comment) =>
+        comment.get({ plain: true })
+      );
+
+      // Push the post with comments into the array
+      postsWithComments.push(plainPost);
+    }
+
+    // Render the homepage with posts, comments, and login status
+    res.render("homepage", {
+      posts: postsWithComments,
+      logged_in: req.session.logged_in,
+    });
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
+// TODO KEEEEEEP THIS
+// router.get("/", async (req, res) => {
+//   try {
+//     // Fetch all posts with associated user details (excluding comments)
+//     const allPosts = await Post.findAll({
+//       include: [
+//         {
+//           model: User,
+//           attributes: ["username"],
+//         },
+//       ],
+//       order: [["createdAt", "DESC"]],
+//     });
+
+//     const posts = allPosts.map((post) => {
+//       const plainPost = post.get({ plain: true });
+//       return { ...plainPost }; // Initialize comments array as empty
+//     });
+
+//     // Render the homepage with posts, comments, and login status
+//     res.render("homepage", { posts, logged_in: req.session.logged_in });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 router.get("/login", async (req, res) => {
   try {
