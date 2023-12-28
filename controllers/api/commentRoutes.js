@@ -86,7 +86,9 @@ router.delete("/:commentId", async (req, res) => {
     const comment = await Comment.findByPk(commentId);
 
     if (!comment || comment.user_id !== req.session.user_id) {
-      return res.status(404).json({ error: "Comment not found or unauthorized" });
+      return res
+        .status(404)
+        .json({ error: "Comment not found or unauthorized" });
     }
 
     // Delete the comment
@@ -98,6 +100,37 @@ router.delete("/:commentId", async (req, res) => {
   } catch (err) {
     console.error("Server Error:", err);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+router.get("/:commentId", async (req, res) => {
+  try {
+    // Fetch the comment data by ID
+    const commentId = req.params.commentId;
+    const commentData = await Comment.findByPk(commentId);
+
+    // Render the edit comment page with the comment data
+    res.status(200).json(commentData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.put("/:commentId", async (req, res) => {
+  try {
+    // Update the comment data
+    const commentId = req.params.commentId;
+    const { newText } = req.body;
+
+    const updatedComment = await Comment.update(
+      { text: newText },
+      { where: { id: commentId } }
+    );
+
+    // Send a success response
+    res.status(200).json(updatedComment);
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 

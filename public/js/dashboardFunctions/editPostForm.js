@@ -8,8 +8,10 @@ document.addEventListener("click", async (event) => {
     const postData = await response.json();
 
     // Create the edit form dynamically
-    const editFormContainer = document.getElementById("editFormContainer");
-    editFormContainer.innerHTML = `
+    const editPostFormContainer = document.getElementById(
+      "editPostFormContainer"
+    );
+    editPostFormContainer.innerHTML = `
       <div class="editForm" id="editForm${postId}">
         <h2>Edit Post</h2>
         <form class="editPostForm" data-post-id="${postId}">

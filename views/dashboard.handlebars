@@ -24,13 +24,13 @@
   <h2>Your Posts</h2>
   {{#each posts}}
     <div class="postDiv">
-      <button id="deleteButton-{{this.dataValues.id}}">Delete Post</button>
-      <button class="editButton" data-post-id="{{this.dataValues.id}}">Edit Post</button>
       <h3>{{this.dataValues.title}}</h3>
       <p>{{this.dataValues.text}}</p>
       <p>Posted on {{format_time this.dataValues.createdAt}}</p>
+      <button id="deleteButton-{{this.dataValues.id}}">Delete Post</button>
+      <button class="editButton" data-post-id="{{this.dataValues.id}}">Edit Post</button>
     </div>
-    <div id="editFormContainer"></div>
+    <div id="editPostFormContainer"></div>
   {{/each}}
 
   <!-- Display comments made by the logged-in user -->
@@ -38,10 +38,12 @@
   {{#each comments}}
     {{log this}}
     <div class="commentDiv">
-      <button class="deleteCommentButton" data-comment-id="{{id}}">Delete
-        Comment</button>
       <p>{{this.text}}</p>
       <p>Commented on {{format_time this.createdAt}}</p>
+      <button class="deleteCommentButton" data-comment-id="{{id}}">Delete
+        Comment</button>
+      <button class="editCommentButton" data-comment-id="{{id}}">Edit Comment</button>
+      <div id="editCommentFormContainer"></div>
     </div>
   {{/each}}
 
@@ -55,3 +57,4 @@
 <script src="/js/dashboardFunctions/editPostForm.js"></script>
 <script src="/js/dashboardFunctions/putPostData.js"></script>
 <script src="/js/dashboardFunctions/deleteComment.js"></script>
+<script src="/js/dashboardFunctions/editComment.js"></script>
