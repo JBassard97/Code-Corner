@@ -77,29 +77,28 @@ router.post("/:postId", async (req, res) => {
   }
 });
 
-// TODO KEEP THIS
-// // Creating a new comment
-// router.post("/:postId", async (req, res) => {
-//   try {
-//     const postId = req.params.postId;
-//     const text = req.body.text;
+// deleting a comment
+router.delete("/:commentId", async (req, res) => {
+  try {
+    const commentId = req.params.commentId;
 
-//     console.log("Received postId:", postId);
-//     console.log("Received text:", text);
+    // Check if the logged-in user owns the comment (optional but recommended)
+    const comment = await Comment.findByPk(commentId);
 
-//     // Create a new comment in the database
-//     const newComment = await Comment.create({
-//       post_id: postId,
-//       text,
-//       user_id: req.session.user_id,
-//     });
+    if (!comment || comment.user_id !== req.session.user_id) {
+      return res.status(404).json({ error: "Comment not found or unauthorized" });
+    }
 
-//     res.status(200).json(newComment);
-//     console.log(newComment);
-//   } catch (err) {
-//     console.error("Server Error:", err);
-//     res.status(500).json("it's getting stuck here");
-//   }
-// });
+    // Delete the comment
+    await Comment.destroy({
+      where: { id: commentId },
+    });
+
+    res.status(204).end(); // Respond with no content for successful deletion
+  } catch (err) {
+    console.error("Server Error:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 module.exports = router;

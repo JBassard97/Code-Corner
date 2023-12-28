@@ -1,8 +1,8 @@
 {{#if logged_in}}
   <h2>Welcome, {{user.username}}!</h2>
   <h2>User Info</h2>
-<h3>User Id: {{user.id}}</h3>
-<h3>Your Email: {{user.email}}</h3>
+  <h3>User Id: {{user.id}}</h3>
+  <h3>Your Email: {{user.email}}</h3>
   <!-- Form for changing password -->
   <h3>Change Password</h3>
   <form id="changePasswordForm">
@@ -24,13 +24,25 @@
   <h2>Your Posts</h2>
   {{#each posts}}
     <div class="postDiv">
-      <button id="deleteButton-{{this.dataValues.id}}">Delete</button>
+      <button id="deleteButton-{{this.dataValues.id}}">Delete Post</button>
       <button class="editButton" data-post-id="{{this.dataValues.id}}">Edit Post</button>
       <h3>{{this.dataValues.title}}</h3>
       <p>{{this.dataValues.text}}</p>
       <p>Posted on {{format_time this.dataValues.createdAt}}</p>
     </div>
     <div id="editFormContainer"></div>
+  {{/each}}
+
+  <!-- Display comments made by the logged-in user -->
+  <h2>Your Comments</h2>
+  {{#each comments}}
+    {{log this}}
+    <div class="commentDiv">
+      <button class="deleteCommentButton" data-comment-id="{{id}}">Delete
+        Comment</button>
+      <p>{{this.text}}</p>
+      <p>Commented on {{format_time this.createdAt}}</p>
+    </div>
   {{/each}}
 
 {{else}}
@@ -42,3 +54,4 @@
 <script src="/js/dashboardFunctions/deletePost.js"></script>
 <script src="/js/dashboardFunctions/editPostForm.js"></script>
 <script src="/js/dashboardFunctions/putPostData.js"></script>
+<script src="/js/dashboardFunctions/deleteComment.js"></script>
