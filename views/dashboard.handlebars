@@ -47,6 +47,9 @@
     </div>
   {{/each}}
 
+  <!-- Button to delete the account -->
+  <button id="deleteAccountButton" data-user-id="{{user.id}}">Delete Account</button>
+
 {{else}}
   <a href="/login"><p>Please log in to manage your user details and manage
       posts!</p></a>
@@ -59,3 +62,4 @@
 <script src="/js/dashboardFunctions/deleteComment.js"></script>
 <script src="/js/dashboardFunctions/editComment.js"></script>
 <script src="/js/dashboardFunctions/putCommentData.js"></script>
+<script src="/js/dashboardFunctions/deleteAccount.js"></script>

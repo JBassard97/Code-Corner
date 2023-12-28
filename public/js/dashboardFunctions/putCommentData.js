@@ -16,7 +16,6 @@ document.addEventListener("submit", async (event) => {
     });
 
     if (response.ok) {
-      // Handle success, e.g., close the edit form or update the UI
       console.log("Comment updated successfully");
       location.reload();
     } else {
