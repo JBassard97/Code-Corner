@@ -19,7 +19,11 @@ const loginFormHandler = async (event) => {
     if (response.ok) {
       document.location.replace("/");
     } else {
-      window.alert("Failed to log in");
+      const errorData = await response.json();
+      console.error("Failed to log in:", errorData.message);
+      window.alert(
+        "Failed to log in. Please check your username and password."
+      );
     }
   }
 };

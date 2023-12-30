@@ -10,17 +10,17 @@ router.get("/", async (req, res) => {
       order: [["id", "DESC"]],
     });
     const users = allusers.map((users) => users.get({ plain: true }));
-    res.json(users); //simple json res for now
-    // res.render("homepage", { users });
+    res.json(users); //simple json res for API
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// Create a new user
 router.post("/", async (req, res) => {
   try {
     const userData = await User.create(req.body);
+
+    console.log("Created user data:", userData);
 
     req.session.save(() => {
       req.session.user_id = userData.id;
@@ -29,26 +29,28 @@ router.post("/", async (req, res) => {
       res.status(200).json(userData);
     });
   } catch (err) {
+    console.error("Error during user creation:", err);
     res.status(400).json(err);
   }
 });
 
-// localhost:3001/api/users/login
-
 router.post("/login", async (req, res) => {
   try {
+    const { username, password } = req.body;
     const userData = await User.findOne({
-      where: { username: req.body.username },
+      where: { username },
     });
 
     if (!userData) {
+      console.log("User not found:", username);
       res.status(400).json({ message: "Incorrect username, please try again" });
       return;
     }
 
-    const validPassword = await userData.checkPassword(req.body.password);
+    const validPassword = await userData.checkPassword(password);
 
     if (!validPassword) {
+      console.log("Incorrect password for user:", username);
       res.status(400).json({ message: "Incorrect password, please try again" });
       return;
     }
@@ -57,9 +59,11 @@ router.post("/login", async (req, res) => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
 
+      console.log("User logged in:", username);
       res.json({ user: userData, message: "You are now logged in!" });
     });
   } catch (err) {
+    console.error("Error during login:", err);
     res.status(400).json(err);
   }
 });

@@ -1,10 +1,12 @@
 {{#if logged_in}}
   <h2>Welcome, {{user.username}}!</h2>
-  <h2>User Info</h2>
-  <h3>User Id: {{user.id}}</h3>
-  <h3>Your Email: {{user.email}}</h3>
+  <h3 class="underline">User Info</h3>
+  <h4>Member Since: {{format_time user.createdAt}}</h4>
+  {{log user}}
+  <h4>User Id: {{user.id}}</h4>
+  <h4>Your Email: {{user.email}}</h4>
   <!-- Form for changing password -->
-  <h3>Change Password</h3>
+  <h3 class="underline">Change Password</h3>
   <form id="changePasswordForm">
     <label for="currentPassword">Current Password:</label>
     <input
@@ -21,7 +23,7 @@
   </form>
 
   <!-- Display posts of the logged-in user -->
-  <h2>Your Posts</h2>
+  <h2 class="underline">Your Posts</h2>
   {{#each posts}}
     <div class="postDiv">
       <h3>{{this.dataValues.title}}</h3>
@@ -29,12 +31,13 @@
       <p>Posted on {{format_time this.dataValues.createdAt}}</p>
       <button id="deleteButton-{{this.dataValues.id}}">Delete Post</button>
       <button class="editButton" data-post-id="{{this.dataValues.id}}">Edit Post</button>
+      <div id="editPostFormContainer-{{this.dataValues.id}}"></div>
     </div>
-    <div id="editPostFormContainer"></div>
+
   {{/each}}
 
   <!-- Display comments made by the logged-in user -->
-  <h2>Your Comments</h2>
+  <h2 class="underline">Your Comments</h2>
   {{#each comments}}
     {{log this}}
     <div class="commentDiv">
@@ -43,13 +46,15 @@
       <button class="deleteCommentButton" data-comment-id="{{id}}">Delete
         Comment</button>
       <button class="editCommentButton" data-comment-id="{{id}}">Edit Comment</button>
-      <div id="editCommentFormContainer"></div>
+      <div id="editCommentFormContainer-{{id}}"></div>
+      {{! <div id="editCommentFormContainer"></div> }}
     </div>
   {{/each}}
 
   <!-- Button to delete the account -->
-  <button id="deleteAccountButton" data-user-id="{{user.id}}">Delete Account</button>
-
+  <div class="alignCenter">
+    <button id="deleteAccountButton" data-user-id="{{user.id}}">Delete Account</button>
+  </div>
 {{else}}
   <a href="/login"><p>Please log in to manage your user details and manage
       posts!</p></a>

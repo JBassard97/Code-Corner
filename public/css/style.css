@@ -1,11 +1,32 @@
+button {
+  background: whitesmoke;
+  color: black;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+input {
+  border-radius: 10px;
+}
+
 /* ! These styles are for the header and main layout */
 
 body {
-  background: linear-gradient(45deg, rgb(31, 119, 100), teal);
+  background: linear-gradient(90deg, cornflowerblue, coral);
+  font-family: "Source Code Pro", monospace;
 }
 
 .mainTitle {
+  color: lightsalmon;
+  margin-bottom: 0px;
+  font-weight: bolder;
+  font-size: 40px;
+}
 
+.oneLiner {
+  margin-top: 0px;
+  color: lightblue;
 }
 
 /* Reset default list styles */
@@ -27,31 +48,86 @@ ul li a {
   color: black; /* Set the text color */
 }
 
-
-
-
-/* ! These styles are for each Post */
+/* ! These styles are for each Post in homepage and dashboard */
+#newPostForm, #changePasswordForm {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px; /* Adjust the max-width as needed */
+  margin: auto; /* Center the form horizontally */
+  margin-bottom: 20px;
+}
 
 .postDiv {
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-  margin: 6px 0px;
-  padding: 5px 8px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  margin: 8px 0px;
+  padding-left: 10px;
+  background: rgb(93, 197, 232);
+  box-shadow: 2px 2px 10px rgb(0, 0, 0);
 }
 
 .postTitle {
-    color: red;
+  text-decoration: underline;
+  margin-top: 3px;
 }
 
 .username {
-  color: darkcyan;
 }
 
 .postedBy {
-  color: khaki;
 }
 
 .createdOn {
-  color: lightskyblue;
+}
+
+/* ! Styles for comment divs */
+
+.commentsContainer {
+  background: lightblue;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-top: 2px;
+  width: 96%;
+  margin-bottom: 5px;
+  padding-bottom: 3px;
+}
+
+.comment,
+.commentDiv {
+  background: lightsalmon;
+  border-radius: 10px;
+  width: 96%;
+  padding-left: 5px;
+  padding-bottom: 1px;
+}
+
+.commentText {
+  font-weight: bold;
+}
+
+/* ! Styling for editPostForm and editCommentForm*/
+.editForm {
+  background: lightsalmon;
+  border-radius: 10px;
+  width: 96%;
+  padding-left: 5px;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+#currentPassword,
+#newPassword {
+  border-radius: 10px;
+}
+
+#deleteAccountButton {
+  height: 50px;
+  background: red;
+}
+
+.alignCenter {
+  text-align: center;
+  margin-top: 20px;
 }

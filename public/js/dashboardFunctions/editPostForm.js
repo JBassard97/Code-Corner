@@ -9,7 +9,7 @@ document.addEventListener("click", async (event) => {
 
     // Create the edit form dynamically
     const editPostFormContainer = document.getElementById(
-      "editPostFormContainer"
+      `editPostFormContainer-${postId}`
     );
     editPostFormContainer.innerHTML = `
       <div class="editForm" id="editForm${postId}">

@@ -40,9 +40,13 @@ const registerUser = async (event) => {
     } else {
       // Handle registration failure
       const result = await response.json();
-      alert(`Registration failed: ${result.message}`);
+      alert(`Registration failed: Password must be > 8 characters!`);
     }
   } catch (err) {
     console.error("Error during registration:", err);
   }
 };
+
+document
+  .getElementById("register-form")
+  .addEventListener("submit", registerUser);
