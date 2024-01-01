@@ -43,8 +43,16 @@ Link to GitHub repository: https://github.com/JBassard97/Code-Corner/
 
 When you load the application on the live site, you'll be greeted with everyone's posts and comments that have already made accounts. When you load the application on your local machine after following the steps in 'Installation', it will load seeded with 3 posts, posted by 1 of 3 random dummy users. In order to make a post, comment, or contribute at all to the homepage, you will need to login and will be prompted to do so. If you visit the Dashboard tab, it will also prompt you to login to manage your user credentials and previous activity on the site. To make an account, simply fill out the Register User form. Your password must be at least 8 characters long, and your 'confirm password' must match your password input. If successful, you'll immediately be shown your personal dashboard page. This displays your 'user_id', the date your account was created, and the email you used to sign up. There is also a form to change your password if you'd like, but you must enter your previous password to really verify that you want to. Below that you'll be displayed all of your previous Posts, and Comments, and be given buttons to either edit their contents or delete them entirely. From here, you should be good to navigate to 'Home' and begin contributing! Tucked at the bottom of the Dashboard there is a 'Delete Account' button, which will promt a window.confirm, and will end your session and destroy your User data if you chose yes.
 
+### API Routes:
+    adding "/api/users" to the live url will return a JSON of all users
+    adding "/api/posts" to the live url will return a JSON of all posts
+    adding "/api/comments" to the live url will return a JSON of all comments
+
 ## License
 
 MIT
 
 ## Screenshots
+<img width="514" alt="Screenshot 2023-12-31 205559" src="https://github.com/JBassard97/Code-Corner/assets/142551579/ee30e56d-a00f-4b10-900b-f7e56e0ba3ca">
+<img width="417" alt="Screenshot 2023-12-31 205631" src="https://github.com/JBassard97/Code-Corner/assets/142551579/e353f79c-7b13-4df5-8e63-dacf8d7f47fa">
+<img width="607" alt="Screenshot 2023-12-31 205921" src="https://github.com/JBassard97/Code-Corner/assets/142551579/5c946f43-ef8b-4017-aa37-6a6df67c8ea8">
