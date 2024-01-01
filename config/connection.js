@@ -1,4 +1,4 @@
-// ! Connection for Heroku's environment
+// ! Connection for Heroku's environment OR standard node environment
 const Sequelize = require("sequelize");
 require("dotenv").config();
 
@@ -23,7 +23,7 @@ if (process.env.JAWSDB_URL) {
 
 module.exports = sequelize;
 
-// ! Connection to standard node environment
+// ! Connection to just standard node environment
 // const Sequelize = require("sequelize");
 // require("dotenv").config();
 
